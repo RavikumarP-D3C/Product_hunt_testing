@@ -792,14 +792,15 @@ for chat in st.session_state.chat_history:
 
 
 
-st.markdown("---")
-st.markdown("**Suggested queries to try:**")
-st.markdown(
-    "- What are the top KG insights for today's Product Hunt launches?  \n"
-    "- Which products appear uncontested in the KG?  \n"
-    "- Summarize KG stats and market gap opportunities.  \n"
-    "- How does today's launch compare to the historical KG?"
-)
+if len(st.session_state.chat_history) == 0:
+    st.markdown("---")
+    st.markdown("**Suggested queries to try:**")
+    st.markdown(
+        "- What are the top KG insights for today's Product Hunt launches?  \n"
+        "- Which products appear uncontested in the KG?  \n"
+        "- Summarize KG stats and market gap opportunities.  \n"
+        "- How does today's launch compare to the historical KG?"
+    )
 
 if prompt := st.chat_input("E.g. What do you know about Mora Marketer?"):
     # Extract session state variables in main thread to avoid thread-context issues
