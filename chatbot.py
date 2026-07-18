@@ -10,7 +10,7 @@ from pyvis.network import Network
 from dotenv import load_dotenv
 
 # Path setup
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 if BASE_DIR not in sys.path:
     sys.path.append(BASE_DIR)
 
@@ -18,7 +18,7 @@ BACKEND_DIR = os.path.join(BASE_DIR, "Backend")
 if BACKEND_DIR not in sys.path:
     sys.path.append(BACKEND_DIR)
 
-from Utils.llm_client import get_llm_client
+from Backend.Utils.llm_client import get_llm_client
 from Backend.Services.product_hunt.fetch_products import fetch_latest_products
 from live_fetch_tools import crawl_multiple_websites
 from kg_tools import (
