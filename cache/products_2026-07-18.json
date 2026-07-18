@@ -1,0 +1,408 @@
+[
+    {
+        "id": "1193175",
+        "name": "Unabyss for Claude",
+        "tagline": "Shared memory across all apps and LLMs. In Claude",
+        "description": "Claude doesn't know what happens in GPT. Neither one really knows who you are or what your company does. Now they can. Unabyss gives Claude memories from your other AI agents and everyday apps: email, Drive, GitHub, Notion, meeting recorders, and 20+ more. It saves new memories too, so GPT and Cursor stay in sync with the exact same context - sharper than wiring each tool into Claude one by one. Finally, a real memory that follows you. Private. Portable.",
+        "website": "https://www.producthunt.com/r/AW6GAYWJDAD4GS?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Productivity",
+            "Artificial Intelligence"
+        ],
+        "votes": 516,
+        "comments": 116,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "9671625",
+                "name": "Dominik Bartosik"
+            },
+            {
+                "id": "9672726",
+                "name": "Marcin Uchacz"
+            },
+            {
+                "id": "9685070",
+                "name": "Stanis\u0142aw Morawski"
+            },
+            {
+                "id": "9030565",
+                "name": "Philip Kubinski"
+            }
+        ]
+    },
+    {
+        "id": "1195845",
+        "name": "Pebbles Ai",
+        "tagline": "AI sales platform for modern B2B teams",
+        "description": "The only GTM&nbsp;orchestration platform you will need to successfully take your products & services to market. Pebbles AI is a Go-To-Market Operating System built for B2B revenue teams. It brings strategy, lead generation, outreach, sales, & shared company knowledge into one AI-powered workspace. Using neurosymbolic AI trained on your business, it helps teams plan campaigns, personalize outreach, generate qualified leads, & execute without switching between disconnected GTM tools.",
+        "website": "https://www.producthunt.com/r/AYLBJIEQ76AGBE?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Sales",
+            "Email Marketing",
+            "Artificial Intelligence"
+        ],
+        "votes": 389,
+        "comments": 88,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "1660774",
+                "name": "Maksym Kuzmovych"
+            }
+        ]
+    },
+    {
+        "id": "1198643",
+        "name": "Kimi K3",
+        "tagline": "The world's first open 3T-class model",
+        "description": "Kimi K3 is the world's first open 3T-class model \u2014 frontier performance across coding, knowledge work, and reasoning, with native multimodality and 1M context.",
+        "website": "https://www.producthunt.com/r/YT3DDK5NRLBZDJ?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Open Source",
+            "Artificial Intelligence",
+            "Development"
+        ],
+        "votes": 351,
+        "comments": 10,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "5925496",
+                "name": "Crystal J"
+            }
+        ]
+    },
+    {
+        "id": "1195968",
+        "name": "Pocket Screen",
+        "tagline": "Keep any Mac window visible in a floating mini screen",
+        "description": "Pocket Screen turns the frontmost window on your Mac into a compact, always-on-top PiP-style view. Keep documents, chats, videos, or reference material visible while you work in another app\u2014without constantly switching windows. Processing stays on your Mac.",
+        "website": "https://www.producthunt.com/r/2LSMNDW563UO3D?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Mac",
+            "Productivity",
+            "Menu Bar Apps"
+        ],
+        "votes": 212,
+        "comments": 46,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "9994661",
+                "name": "Masaki Iino"
+            }
+        ]
+    },
+    {
+        "id": "1198296",
+        "name": "Basedash Suggestions",
+        "tagline": "Your AI data analyst, now with ideas of its own.",
+        "description": "Basedash now suggests the analysis before you ask. It studies your connected data, your past chats, and the dashboards you've built, then generates personalized suggestions \u2014 questions worth asking, dashboards worth building, automations worth scheduling. Click one and the work starts. Used ideas are replaced with fresh ones, so the well never runs dry. Every suggestion is generated per person, for growth, finance, and ops alike. No more blank page. Your analyst makes the first move.",
+        "website": "https://www.producthunt.com/r/5WFCKM6N2GBEV4?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Artificial Intelligence",
+            "Data & Analytics",
+            "Business Intelligence"
+        ],
+        "votes": 147,
+        "comments": 23,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "2812191",
+                "name": "Kristofer Lachance"
+            }
+        ]
+    },
+    {
+        "id": "1198652",
+        "name": "Scribble Party",
+        "tagline": "A local-first whiteboard studio for teachers and creators",
+        "description": "Most lesson recorders send your video to someone's cloud and want an account first. Scribble Party runs entirely in your browser. Draw on an infinite canvas, drop a live camera bubble of yourself on the board (it cuts out your background), and record the whole thing with your voice. Recordings save to your device as you go, so a crashed tab doesn't lose a take. Works offline as an installed app. No signup, no install, nothing ever uploaded!",
+        "website": "https://www.producthunt.com/r/ZOFPR5D7GFVC5I?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Productivity",
+            "Education",
+            "GitHub",
+            "Illustration"
+        ],
+        "votes": 140,
+        "comments": 12,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "10033025",
+                "name": "Dakota Kim"
+            }
+        ]
+    },
+    {
+        "id": "1197899",
+        "name": "Yapper Leaderboard",
+        "tagline": "See the biggest startup yappers on X/Twitter ",
+        "description": "The Yapper Leaderboard ranks Twitter/X's startups and users by how much they yap. The startups with the most impressions climb to the top of the daily leaderboard. See weekly growers to keep your eye on which people and companies are trending upwards! Sign into X to add your company and team to the leaderboard!",
+        "website": "https://www.producthunt.com/r/NNRTXAZRZXHERS?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Twitter",
+            "Social Media",
+            "Analytics"
+        ],
+        "votes": 130,
+        "comments": 17,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "8537594",
+                "name": "Yahia Bakour"
+            }
+        ]
+    },
+    {
+        "id": "1197896",
+        "name": "Kimi K3",
+        "tagline": "The world's first open 3T-class model",
+        "description": "Kimi K3 is a 2.8T-parameter open model featuring native vision capabilities, a 1-million-token context window, and Moonshot AI's Kimi Delta Attention and Attention Residuals architectures. Built as the world's first open 3T-class model, it delivers frontier-level performance in long-horizon coding, compiler development, digital creation, and scientific reasoning, outperforming previous open models in scaling efficiency and agentic capabilities.",
+        "website": "https://www.producthunt.com/r/SLCB2A2AJCZQNV?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Open Source",
+            "Artificial Intelligence",
+            "Development"
+        ],
+        "votes": 52,
+        "comments": 19,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "9163610",
+                "name": "Yutao Zhang"
+            }
+        ]
+    },
+    {
+        "id": "1196373",
+        "name": "isvisible.ai?",
+        "tagline": "Free AI visibility audit",
+        "description": "Free AI visibility audit. Find out whether ChatGPT, Claude, Perplexity and Google AI can access your website. Get an instant 0\u2013100 score with an access breakdown for each agent.",
+        "website": "https://www.producthunt.com/r/FP4B6BWNI73EUO?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Marketing",
+            "Artificial Intelligence",
+            "Search"
+        ],
+        "votes": 42,
+        "comments": 23,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "10031330",
+                "name": "Emir"
+            }
+        ]
+    },
+    {
+        "id": "1198341",
+        "name": "PH Daily Top 50",
+        "tagline": " The day's top 50 launches, each summarized by AI",
+        "description": "A free, open-source digest of the 50 most-upvoted launches each day \u2014 each with a short, plain-English AI summary of what it does, who it's for, and what stands out. Skim the whole day in two minutes instead of opening 50 tabs. It updates automatically once the daily rankings settle, keeps the last 7 days, and needs no account. Filter by category or search across every summary. Open source (MIT) \u2014 run your own copy with your own API keys.",
+        "website": "https://www.producthunt.com/r/PRPRHN4PGU7J6A?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Open Source",
+            "GitHub"
+        ],
+        "votes": 40,
+        "comments": 7,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "9752207",
+                "name": "Furkan Y\u0131lmaz"
+            }
+        ]
+    },
+    {
+        "id": "1198187",
+        "name": "Tilores Studio desktop entity resolution",
+        "tagline": "Entity resolution on your machine. No cloud, no signup.",
+        "description": "Entity resolution has always been enterprise software: book a demo, sign a big contract before you see it run on your data. Tilores Studio changes that. The same real-time matching engine behind our cloud product, running entirely on your machine. Load your CSV, resolve duplicates live, nothing leaves your laptop. Now a local MCP server lets Claude Code, Codex and other AI assistants search, import and steer Studio against your data. Free up to 100k records. macOS, Windows, Linux.",
+        "website": "https://www.producthunt.com/r/444SIGAP456JYJ?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Data & Analytics",
+            "Database",
+            "Data Science"
+        ],
+        "votes": 36,
+        "comments": 36,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "4629879",
+                "name": "Sami Yaseen"
+            }
+        ]
+    },
+    {
+        "id": "1197203",
+        "name": "Vetta X",
+        "tagline": "Scale your personal brand on X with automated AI agents",
+        "description": "Vetta X is the AI growth workspace for X. Reply alerts on the creators you track, drafts written in your voice by the Vetta AI agent, one-tap publish. You stay in control.",
+        "website": "https://www.producthunt.com/r/WMMU5URSNM53AP?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Social Media",
+            "Marketing",
+            "Artificial Intelligence"
+        ],
+        "votes": 28,
+        "comments": 12,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "0",
+                "name": "[REDACTED]"
+            },
+            {
+                "id": "10035713",
+                "name": "Thomas Max"
+            }
+        ]
+    },
+    {
+        "id": "1198647",
+        "name": "Convert PDF to Excel",
+        "tagline": "Turn any PDF into an editable Excel sheet \u2014 one click",
+        "description": "Convert PDF to Excel is a free Chrome extension that turns PDFs into clean, editable spreadsheets in one click. Text-based PDFs are parsed instantly and locally \u2014 nothing leaves your machine. Scanned or image PDFs get AI-powered table extraction over HTTPS. No login, no size limits, no subscription.",
+        "website": "https://www.producthunt.com/r/DHM3OFJBOA7FOM?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Chrome Extensions",
+            "Productivity",
+            "Artificial Intelligence"
+        ],
+        "votes": 26,
+        "comments": 8,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "9677673",
+                "name": "Denis"
+            }
+        ]
+    },
+    {
+        "id": "1189878",
+        "name": "Phrase",
+        "tagline": "Your AI notes can edit themselves",
+        "description": "Every AI note app bolts a chat box beside your note. Phrase's agent works inside a native block editor: you ask, it rewrites the note itself, not a reply on the side. Sources read, follow-ups one tap away. It never sends on its own. Your iCloud, not ours.",
+        "website": "https://www.producthunt.com/r/3UXGQQUO6L5IR4?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Productivity",
+            "Writing",
+            "Notes"
+        ],
+        "votes": 23,
+        "comments": 13,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "9962862",
+                "name": "Jonas"
+            }
+        ]
+    },
+    {
+        "id": "1197972",
+        "name": "CartHappy ",
+        "tagline": "Splits your grocery cart across stores, automatically",
+        "description": "Most grocery apps show you deals inside one store. CartHappy compares 350M prices a day across 10,000 stores, auto-applies every coupon, and splits your cart to whatever's cheapest that week. It can also learn your regular list and build your cart automatically \u2014 WXYZ Detroit tested it live on TV, saving a family $28 instantly. We built ours as an extension because it works horizontally, sitting inside each retailer's environment while helping the shopper shop across stores, not locked into one.",
+        "website": "https://www.producthunt.com/r/XT7TA5X32W7LTT?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Artificial Intelligence",
+            "E-Commerce",
+            "Shopping"
+        ],
+        "votes": 22,
+        "comments": 20,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "8332853",
+                "name": "John Laramie"
+            }
+        ]
+    },
+    {
+        "id": "1197921",
+        "name": "WizeMe.APP: Personal Life Partner OS",
+        "tagline": "Private AI memory for clearer decisions and follow-through",
+        "description": "WizeMe.APP is a private thinking partner that remembers the context you choose to keep across conversations, decisions, relationships, and daily rituals. Morning Brief and Nightly De-brief keep the day connected. Visual Mirror shows evidence, confidence, and source gaps, then learns from your feedback. Decision Briefs and Hard-Talk Prep turn reflection into action. Memory stays permissioned, source-labeled, and exportable. Start free for 14 days.",
+        "website": "https://www.producthunt.com/r/YCOYEKSQX5VP6I?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Influenze+AI+%28ID%3A+293109%29",
+        "topics": [
+            "Productivity",
+            "Artificial Intelligence"
+        ],
+        "votes": 21,
+        "comments": 10,
+        "launch_date": "2026-07-17T07:01:00Z",
+        "makers": [
+            {
+                "id": "9872348",
+                "name": "Rick Katz"
+            }
+        ]
+    }
+]
