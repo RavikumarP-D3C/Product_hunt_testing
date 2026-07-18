@@ -686,11 +686,16 @@ def render_sidebar():
     if os.path.exists(DB_PATH):
         conn = sqlite3.connect(DB_PATH)
         cur = conn.cursor()
-        cur.execute("SELECT entity_type, COUNT(*) FROM knowledge_entities GROUP BY entity_type")
-        st.sidebar.markdown("---")
-        st.sidebar.markdown("**KG Stats**")
-        for row in cur.fetchall():
-            st.sidebar.markdown(f"- **{row[0]}**: {row[1]}")
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='knowledge_entities'")
+        if cur.fetchone():
+            cur.execute("SELECT entity_type, COUNT(*) FROM knowledge_entities GROUP BY entity_type")
+            st.sidebar.markdown("---")
+            st.sidebar.markdown("**KG Stats**")
+            for row in cur.fetchall():
+                st.sidebar.markdown(f"- **{row[0]}**: {row[1]}")
+        else:
+            st.sidebar.markdown("---")
+            st.sidebar.warning("KG database is present but not initialized yet.")
         conn.close()
 
     st.sidebar.markdown("---")
