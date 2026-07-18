@@ -6,7 +6,6 @@ import datetime
 import tempfile
 import asyncio
 import streamlit as st
-from pyvis.network import Network
 from dotenv import load_dotenv
 
 # Path setup
@@ -681,68 +680,9 @@ async def generate_baseline_response(user_query: str, today_products: list, all_
 
 def render_sidebar():
     st.sidebar.title("Knowledge Graph Explorer")
-    st.sidebar.markdown("Visualize the relationships stored in `knowledge_graph.db`.")
+    st.sidebar.markdown("View Knowledge Graph stats and sync options.")
 
-    rel_filter = st.sidebar.multiselect(
-        "Relationship types to show",
-        ["COMPETES_WITH", "SIMILAR_TO", "TARGETS", "HAS_FEATURE", "BELONGS_TO", "DEVELOPS"],
-        default=["COMPETES_WITH", "SIMILAR_TO", "TARGETS"],
-    )
-    limit = st.sidebar.slider("Max edges to render", 10, 100, 40, step=10)
-
-    if st.sidebar.button("Generate Graph", use_container_width=True):
-        if not os.path.exists(DB_PATH):
-            st.sidebar.error("knowledge_graph.db not found.")
-            return
-        with st.sidebar.status("Building graph...") as status:
-            try:
-                conn = sqlite3.connect(DB_PATH)
-                cur = conn.cursor()
-                placeholders = ",".join("?" * len(rel_filter))
-                cur.execute(f"""
-                    SELECT e1.canonical_name, e1.entity_type, r.relationship_type,
-                           e2.canonical_name, e2.entity_type
-                    FROM knowledge_relationships r
-                    JOIN knowledge_entities e1 ON r.source_entity_id = e1.id
-                    JOIN knowledge_entities e2 ON r.target_entity_id = e2.id
-                    WHERE r.relationship_type IN ({placeholders}) AND r.status='active'
-                    LIMIT ?
-                """, rel_filter + [limit])
-                edges = cur.fetchall()
-                conn.close()
-
-                color_map = {
-                    "Product":         "#4e9af1",
-                    "Company":         "#ff4b4b",
-                    "Feature":         "#2ca02c",
-                    "Category":        "#9467bd",
-                    "CustomerSegment": "#e8a838",
-                }
-
-                net = Network(height="420px", width="100%", bgcolor="#0d1117",
-                              font_color="#c9d1e0", directed=True)
-                net.set_options('{"physics": {"barnesHut": {"gravitationalConstant": -5000}}}')
-
-                for src, s_type, rel, tgt, t_type in edges:
-                    net.add_node(src, label=src[:22], color=color_map.get(s_type, "#888"), size=18)
-                    net.add_node(tgt, label=tgt[:22], color=color_map.get(t_type, "#888"), size=14)
-                    net.add_edge(src, tgt, title=rel, color="#555")
-
-                import tempfile
-                tmp = tempfile.mkdtemp()
-                path = os.path.join(tmp, "kg_graph.html")
-                net.save_graph(path)
-                with open(path, "r", encoding="utf-8") as f:
-                    html = f.read()
-
-                status.update(label=f"Done — {len(edges)} edges rendered", state="complete")
-                # Use st.html (new Streamlit API) instead of deprecated st.components.v1.html
-                st.html(html)
-
-            except Exception as e:
-                status.update(label=f"Error: {e}", state="error")
-
-    # Quick stats
+    # Quick KG stats
     if os.path.exists(DB_PATH):
         conn = sqlite3.connect(DB_PATH)
         cur = conn.cursor()
@@ -846,6 +786,15 @@ for chat in st.session_state.chat_history:
 
 
 
+
+st.markdown("---")
+st.markdown("**Suggested queries to try:**")
+st.markdown(
+    "- What are the top KG insights for today's Product Hunt launches?  \n"
+    "- Which products appear uncontested in the KG?  \n"
+    "- Summarize KG stats and market gap opportunities.  \n"
+    "- How does today's launch compare to the historical KG?"
+)
 
 if prompt := st.chat_input("E.g. What do you know about Mora Marketer?"):
     # Extract session state variables in main thread to avoid thread-context issues
