@@ -476,11 +476,16 @@ async def run_responses_agent(
     tools: list,
     previous_response_id: str,
     today_products: list
-) -> tuple[str, str]:
+) -> tuple[str, str, int, int, float]:
     """
     Executes a multi-turn, tool-calling loop using the Azure OpenAI Responses API.
-    Returns (response_text, new_response_id).
+    Returns (response_text, new_response_id, total_input_tokens, total_output_tokens, latency).
     """
+    import time
+    start_time = time.perf_counter()
+    total_input_tokens = 0
+    total_output_tokens = 0
+
     client = get_llm_client()
     deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
     
@@ -521,10 +526,23 @@ async def run_responses_agent(
         accumulated_text = ""
         tool_call_to_execute = None
         
+        turn_input_tokens = 0
+        turn_output_tokens = 0
+        
         async for event in response:
             if hasattr(event, 'response') and hasattr(event.response, 'id'):
                 current_response_id = event.response.id
                 
+            if hasattr(event, 'response') and event.response:
+                usage = getattr(event.response, 'usage', None)
+                if usage:
+                    if isinstance(usage, dict):
+                        turn_input_tokens = usage.get('input_tokens') or usage.get('prompt_tokens') or 0
+                        turn_output_tokens = usage.get('output_tokens') or usage.get('completion_tokens') or 0
+                    else:
+                        turn_input_tokens = getattr(usage, 'input_tokens', getattr(usage, 'prompt_tokens', 0))
+                        turn_output_tokens = getattr(usage, 'output_tokens', getattr(usage, 'completion_tokens', 0))
+                        
             if event.type == "response.output_text.delta":
                 accumulated_text += event.delta
                 
@@ -535,11 +553,15 @@ async def run_responses_agent(
                         "arguments": json.loads(event.item.arguments),
                         "call_id": event.item.call_id
                     }
-            elif event.type == "response.done":
+            elif event.type in ("response.done", "response.completed"):
                 break
                 
+        total_input_tokens += turn_input_tokens
+        total_output_tokens += turn_output_tokens
+
         if not tool_call_to_execute:
-            return accumulated_text, current_response_id
+            latency = time.perf_counter() - start_time
+            return accumulated_text, current_response_id, total_input_tokens, total_output_tokens, latency
             
         # Execute the tool
         fn = tool_call_to_execute["name"]
@@ -575,7 +597,7 @@ async def run_responses_agent(
         }
 
 
-async def generate_kg_response(user_query: str, today_products: list, kg_summary: str, previous_response_id: str = None) -> tuple[str, str]:
+async def generate_kg_response(user_query: str, today_products: list, kg_summary: str, previous_response_id: str = None) -> tuple[str, str, int, int, float]:
     today_context = "### Today's Live Products (from daily cache):\n"
     for p in today_products:
         today_context += f"- {p.get('name')}: {p.get('tagline')} | {p.get('website','')}\n"
@@ -617,7 +639,7 @@ async def generate_kg_response(user_query: str, today_products: list, kg_summary
             today_products=today_products
         )
     except Exception as e:
-        return f"Azure OpenAI API Error: {str(e)}", previous_response_id
+        return f"Azure OpenAI API Error: {str(e)}", previous_response_id, 0, 0, 0.0
 
 
 def get_all_db_products() -> list:
@@ -634,7 +656,7 @@ def get_all_db_products() -> list:
         return []
 
 
-async def generate_baseline_response(user_query: str, today_products: list, all_products: list, previous_response_id: str = None) -> tuple[str, str]:
+async def generate_baseline_response(user_query: str, today_products: list, all_products: list, previous_response_id: str = None) -> tuple[str, str, int, int, float]:
     """Generates a response WITHOUT Knowledge Graph (baseline)."""
     today_context = "### Today's Live Products (from daily cache):\n"
     for p in today_products:
@@ -671,7 +693,7 @@ async def generate_baseline_response(user_query: str, today_products: list, all_
             today_products=today_products
         )
     except Exception as e:
-        return f"Azure OpenAI API Error: {str(e)}", previous_response_id
+        return f"Azure OpenAI API Error: {str(e)}", previous_response_id, 0, 0, 0.0
 
 
 # ─────────────────────────────────────────────────────────────
@@ -681,6 +703,68 @@ async def generate_baseline_response(user_query: str, today_products: list, all_
 def render_sidebar():
     st.sidebar.title("Knowledge Graph Explorer")
     st.sidebar.markdown("View Knowledge Graph stats and sync options.")
+
+    # Performance Metrics Section
+    if "perf_history" not in st.session_state:
+        st.session_state.perf_history = []
+        
+    st.sidebar.markdown("---")
+    st.sidebar.subheader("⚡ Performance Metrics")
+    
+    perf = st.session_state.perf_history
+    if not perf:
+        st.sidebar.info("No queries executed yet. Run a query to see performance comparison!")
+    else:
+        # Get latest query stats
+        latest = perf[-1]
+        st.sidebar.markdown("**Latest Query Metrics:**")
+        
+        c1, c2 = st.sidebar.columns(2)
+        with c1:
+            st.markdown("**With KG**")
+            st.markdown(f"⏱️ `{latest['with_kg']['latency']:.2f}s`")
+            st.markdown(f"🏷️ `{latest['with_kg']['total_tokens']}` tokens")
+        with c2:
+            st.markdown("**Without KG**")
+            st.markdown(f"⏱️ `{latest['without_kg']['latency']:.2f}s`")
+            st.markdown(f"🏷️ `{latest['without_kg']['total_tokens']}` tokens")
+
+        # Expander for query-by-query breakdown and averages
+        with st.sidebar.expander("🔍 Detailed Metrics Breakdown"):
+            n_queries = len(perf)
+            avg_lat_w = sum(q['with_kg']['latency'] for q in perf) / n_queries
+            avg_tok_w = sum(q['with_kg']['total_tokens'] for q in perf) / n_queries
+            avg_in_w = sum(q['with_kg']['input_tokens'] for q in perf) / n_queries
+            avg_out_w = sum(q['with_kg']['output_tokens'] for q in perf) / n_queries
+
+            avg_lat_wo = sum(q['without_kg']['latency'] for q in perf) / n_queries
+            avg_tok_wo = sum(q['without_kg']['total_tokens'] for q in perf) / n_queries
+            avg_in_wo = sum(q['without_kg']['input_tokens'] for q in perf) / n_queries
+            avg_out_wo = sum(q['without_kg']['output_tokens'] for q in perf) / n_queries
+
+            st.markdown("### 📊 Averages")
+            st.markdown(f"**With KG:**")
+            st.markdown(f"- Avg Latency: `{avg_lat_w:.2f}s`")
+            st.markdown(f"- Avg Tokens: `{avg_tok_w:.1f}` (In: `{avg_in_w:.1f}`, Out: `{avg_out_w:.1f}`)")
+            
+            st.markdown(f"**Without KG:**")
+            st.markdown(f"- Avg Latency: `{avg_lat_wo:.2f}s`")
+            st.markdown(f"- Avg Tokens: `{avg_tok_wo:.1f}` (In: `{avg_in_wo:.1f}`, Out: `{avg_out_wo:.1f}`)")
+
+            st.markdown("---")
+            st.markdown("### 📜 Query History")
+            for i, q in enumerate(perf, 1):
+                st.markdown(f"**Q{i}:** *{q['query']}*")
+                c_w, c_wo = st.columns(2)
+                with c_w:
+                    st.markdown("**With KG**")
+                    st.markdown(f"- Latency: `{q['with_kg']['latency']:.2f}s`")
+                    st.markdown(f"- Tokens: `{q['with_kg']['total_tokens']}` (In: `{q['with_kg']['input_tokens']}`, Out: `{q['with_kg']['output_tokens']}`)")
+                with c_wo:
+                    st.markdown("**Without KG**")
+                    st.markdown(f"- Latency: `{q['without_kg']['latency']:.2f}s`")
+                    st.markdown(f"- Tokens: `{q['without_kg']['total_tokens']}` (In: `{q['without_kg']['input_tokens']}`, Out: `{q['without_kg']['output_tokens']}`)")
+                st.markdown("---")
 
     # Quick KG stats
     if os.path.exists(DB_PATH):
@@ -708,6 +792,7 @@ def render_sidebar():
                 
                 # Clear session state keys to force reload of products/KG summaries
                 st.session_state.chat_history = []
+                st.session_state.perf_history = []
                 st.session_state.left_response_id = None
                 st.session_state.right_response_id = None
                 if "all_products" in st.session_state:
@@ -724,6 +809,7 @@ def render_sidebar():
     st.sidebar.markdown("---")
     if st.sidebar.button("Clear Chat & Refresh Cache", use_container_width=True):
         st.session_state.chat_history = []
+        st.session_state.perf_history = []
         st.session_state.left_response_id = None
         st.session_state.right_response_id = None
         if "all_products" in st.session_state:
@@ -811,23 +897,23 @@ if prompt := st.chat_input("E.g. What do you know about Mora Marketer?"):
     right_response_id_main = st.session_state.right_response_id
 
     async def get_both_responses():
-        left_res, left_id = await generate_kg_response(
+        left_res, left_id, left_in_t, left_out_t, left_lat = await generate_kg_response(
             prompt,
             today_products_main,
             kg_summary_main,
             left_response_id_main
         )
-        right_res, right_id = await generate_baseline_response(
+        right_res, right_id, right_in_t, right_out_t, right_lat = await generate_baseline_response(
             prompt,
             today_products_main,
             all_products_main,
             right_response_id_main
         )
-        return left_res, left_id, right_res, right_id
+        return left_res, left_id, left_in_t, left_out_t, left_lat, right_res, right_id, right_in_t, right_out_t, right_lat
 
     # Show loading indicator and fetch responses simultaneously using the thread runner
     with st.spinner("Both bots are generating responses..."):
-        left_response, new_left_id, right_response, new_right_id = run_async_in_thread(get_both_responses())
+        left_response, new_left_id, left_in_t, left_out_t, left_lat, right_response, new_right_id, right_in_t, right_out_t, right_lat = run_async_in_thread(get_both_responses())
 
     st.session_state.left_response_id = new_left_id
     st.session_state.right_response_id = new_right_id
@@ -836,6 +922,24 @@ if prompt := st.chat_input("E.g. What do you know about Mora Marketer?"):
         "user": prompt,
         "left": left_response,
         "right": right_response
+    })
+
+    if "perf_history" not in st.session_state:
+        st.session_state.perf_history = []
+    st.session_state.perf_history.append({
+        "query": prompt,
+        "with_kg": {
+            "latency": left_lat,
+            "input_tokens": left_in_t,
+            "output_tokens": left_out_t,
+            "total_tokens": left_in_t + left_out_t
+        },
+        "without_kg": {
+            "latency": right_lat,
+            "input_tokens": right_in_t,
+            "output_tokens": right_out_t,
+            "total_tokens": right_in_t + right_out_t
+        }
     })
     st.rerun()
 
